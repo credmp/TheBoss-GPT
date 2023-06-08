@@ -23,7 +23,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
     setupInputContainer.innerHTML = `<img src="images/loading.svg" class="loading" id="loading">`
     ideaBossText.innerText = `Ok, laat ik dat eens aan de binnenkant van mijn oogjes bekijken.`
     fetchBotReply(userInput)
-    //fetchBusinessPlan(userInput)
+    fetchBusinessIdea(userInput)
   }
 })
 
@@ -41,3 +41,17 @@ Output: `,
   ideaBossText.innerText = response.data.choices[0].text.trim()
 } 
 
+async function fetchBusinessIdea(ideevoorstel) {
+  console.log("De bot gaat een voorstel schrijven");
+  const response = await openai.createCompletion({
+    model: 'text-davinci-003',
+    // few shot learning
+    prompt: `Beschrijf in een uitgebreid voorstel hoe we geld kunnen gaan verdienen aan dit idee. Bedenkt ook een pakkende bedrijfsnaam die je in het voorstel verwerkt. Je geeft daarbij ook aan hoe je denkt. Schrijf het voorstel als een persbericht.
+###
+Invoer: ${ideevoorstel}
+Output: `,
+    max_tokens: 700 // Hoe veel tokens de bot mag gebruiken om een antwoord te geven
+  })
+  const voorstel = response.data.choices[0].text.trim();
+  document.getElementById('output-text').innerText = voorstel;
+}
