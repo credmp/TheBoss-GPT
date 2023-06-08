@@ -5,7 +5,7 @@ const ideaBossText = document.getElementById('idea-boss-text')
 
 // Configureer de openai api, belangrijk hier is de apiKey. Deze is te vinden op https://platform.openai.com/account/api-keys
 const configuration = new Configuration({
-  apiKey: "HIER DE API KEY"
+  apiKey: ""
 })
 
 const openai = new OpenAIApi(configuration)
@@ -28,11 +28,15 @@ document.getElementById("send-btn").addEventListener("click", () => {
 })
 
 async function fetchBotReply(ideevoorstel) {
+  console.log("Asking the bot to give a quick reply on the topic")
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
     // few shot learning
-    prompt: `HIER DE PROMPT`,
-    max_tokens: 150 // Hoe veel tokens de bot mag gebruiken om een antwoord te geven
+    prompt: `Schrijf een kort bericht waarin je sarcastich uitlegt dat je het een slecht idee vind, maar dat je het alsnog zal gaan onderzoeken. Je geeft aan dat je er even over na gaat denken.
+###
+Invoer: ${ideevoorstel}
+Output: `,
+    max_tokens: 200 // Hoe veel tokens de bot mag gebruiken om een antwoord te geven
   })
   ideaBossText.innerText = response.data.choices[0].text.trim()
 } 
