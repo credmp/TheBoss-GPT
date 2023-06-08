@@ -54,4 +54,50 @@ Output: `,
   })
   const voorstel = response.data.choices[0].text.trim();
   document.getElementById('output-text').innerText = voorstel;
+
+  fetchTitle(voorstel);
+}
+
+async function fetchTitle(voorstel) {
+  console.log("De bot gaat een title schrijven");
+  const response = await openai.createCompletion({
+    model: 'text-davinci-003',
+    // few shot learning
+    prompt: `Uit het voorstel haal je de titel van het persbericht.
+###
+Invoer: ${voorstel}
+Output: `,
+    max_tokens: 100 // Hoe veel tokens de bot mag gebruiken om een antwoord te geven
+  })
+  const titel = response.data.choices[0].text.trim();
+  console.log(titel);
+  document.getElementById('output-title').innerText = titel;
+  fetchImagePromt(titel, voorstel);
+}
+
+async function fetchImagePromt(titel, voorstel){
+  const response = await openai.createCompletion({
+    model: 'text-davinci-003',
+    prompt: `Geef een korte omschrijving van een plaatje wat voor advertentie gebruikt kan worden. Het plaatje moet passen bij de titel en het voorstel.
+    ###
+    titel: ${titel}
+    voorstel: ${voorstel}
+    image description:
+    `,
+    temperature: 0.8,
+    max_tokens: 100
+  })
+  fetchImageUrl(response.data.choices[0].text.trim())
+}
+
+async function fetchImageUrl(imagePrompt){
+  const response = await openai.createImage({
+    prompt: `${imagePrompt}. Zet geen tekst in het plaatje.`,
+    n: 1,
+    size: '256x256',
+    response_format: 'b64_json'
+  })
+  document.getElementById('output-img-container').innerHTML = `<img src="data:image/png;base64,${response.data.data[0].b64_json}">`
+  setupInputContainer.innerHTML = `Hier is het voorstel...`
+  ideaBossText.innerText = `Wat een ontzettend goed idee was dit toch, ik zal nooit meer aan je twijfelen als ik maar 50% krijg 💰`
 }
