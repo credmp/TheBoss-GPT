@@ -1,45 +1,50 @@
 <!doctype html>
 <html>
 
-	<head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-		<title>The Boss</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@500&family=Poppins:wght@400;700&display=swap"
-					rel="stylesheet">
-		<link rel="stylesheet" href="index.css">
-	</head>
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+	<title>The Boss</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@500&family=Poppins:wght@400;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="index.css">
+</head>
 
-	<body>
-		<main>
-			<section id="setup-container">
-				<div class="setup-inner">
-					<img src="/images/theboss.jpg">
-					<div class="speech-bubble-ai" id="speech-bubble-ai">
-						<p id="idea-boss-text">
-							Geef me een idee en ik vertel je precies wat ik er van denk. Als het een goed idee is maak ik er een hele business van!
-						</p>
-					</div>
+<body>
+	<main>
+		<section id="setup-container">
+			<div class="setup-inner">
+				<img src="/images/theboss.jpg">
+				<div class="speech-bubble-ai" id="speech-bubble-ai">
+					<p id="idea-boss-text">
+						Geef me een idee en ik vertel je precies wat ik er van denk. Als het een goed idee is maak ik er
+						een hele business van!
+					</p>
 				</div>
-				<div class="setup-inner setup-input-container" id="setup-input-container">
-					<textarea id="setup-textarea" placeholder="Elk idee kan goud waard zijn!"></textarea>
-					<button class="send-btn" id="send-btn" aria-label="send">
-						<img src="images/send-btn-icon.png" alt="send">
-					</button>
-				</div>
-			</section>
-			<!--
+			</div>
+			<div class="setup-inner setup-input-container" id="setup-input-container">
+				<textarea id="setup-textarea" placeholder="Elk idee kan goud waard zijn!"></textarea>
+				<button class="send-btn" id="send-btn" aria-label="send">
+					<img src="images/send-btn-icon.png" alt="send">
+				</button>
+			</div>
+		</section>
+		<!--
 				 De output contains bevat de data die gegeneerd wordt door de AI.
 			-->
-			<section class="output-container" id="output-container">
-				<div id="output-img-container" class="output-img-container"></div>
-				<h1 id="output-title"></h1>
-				<h2 id="output-stars"></h2>
-				<p id="output-text"></p>
-			</section>
-		</main>	
-		<script type="module" src="index.js"></script>
-	</body>
+		<section class="output-container" id="output-container">
+			<div id="output-img-container" class="output-img-container">
+				<img src="https://via.placeholder.com/256x256">
+			</div>
+			<h1 id="output-title">Een titel</h1>
+			<h2 id="output-stars"></h2>
+			<p id="output-text">De inhoud</p>
+		</section>
+	</main>
+	<script type="module" src="index.js"></script>
+</body>
 
 </html>
